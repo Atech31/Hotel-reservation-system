@@ -1,0 +1,119 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Hotel Reservation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        h2 { text-align: center; margin-bottom: 20px; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background-color: #0056b3; }
+        .message { margin-top: 15px; text-align: center; font-size: 14px; }
+        .link { text-align: center; margin-top: 15px; }
+        .link a { color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="register-container">
+    <h2>Create Account</h2>
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required placeholder="Enter full name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role">
+                <option value="ROLE_USER">User</option>
+                <option value="ROLE_ADMIN">Admin</option>
+            </select>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    
+    <div id="responseMessage" class="message"></div>
+
+    <div class="link">
+        <p>Already have an account? <a href="/login.html">Login here</a></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const role = document.getElementById('role').value;
+        const messageDiv = document.getElementById('responseMessage');
+
+        try {
+            const response = await fetch('/api/users/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, role })
+            });
+
+            if (response.ok) {
+                messageDiv.style.color = 'green';
+                messageDiv.innerText = 'Registration successful! Redirecting to login...';
+                setTimeout(() => window.location.href = '/login.html', 1500);
+            } else {
+                const errorText = await response.text();
+                messageDiv.style.color = 'red';
+                messageDiv.innerText = 'Registration failed: ' + errorText;
+            }
+        } catch (err) {
+            messageDiv.style.color = 'red';
+            messageDiv.innerText = 'Error connecting to server.';
+        }
+    });
+</script>
+
+</body>
+</html>
