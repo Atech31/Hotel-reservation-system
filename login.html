@@ -1,0 +1,233 @@
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Stay Portal - Login</title>
+    <style>
+        :root {
+            --neon-blue: #00f2fe;
+            --neon-glow: #4facfe;
+            --glass-bg: rgba(15, 23, 42, 0.65);
+            --glass-border: rgba(0, 242, 254, 0.25);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)), 
+                             url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* 💎 NEON GLASS CONTAINER */
+        .login-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.15), 
+                        inset 0 0 15px rgba(0, 242, 254, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-sizing: border-box;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .login-card:hover {
+            border-color: rgba(0, 242, 254, 0.5);
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.3), 
+                        inset 0 0 20px rgba(0, 242, 254, 0.1);
+        }
+
+        /* 🏷️ HEADINGS & LOGO */
+        .brand-header h1 {
+            margin: 0;
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+        }
+
+        .brand-header p {
+            margin: 8px 0 30px 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 📝 FORM STYLING */
+        .form-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
+        }
+
+        /* ⚡ NEON ACTION BUTTON */
+        .login-btn {
+            background: linear-gradient(135deg, var(--neon-glow), var(--neon-blue));
+            color: #0f172a;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 25px rgba(0, 242, 254, 0.6);
+            filter: brightness(1.1);
+        }
+
+
+        /* 🔗 LINKS */
+        .footer-links {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-links a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: text-shadow 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+        }
+        
+        
+        /* ⚡ POWERED BY BADGE */
+        .powered-by {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .powered-by span {
+            color: var(--neon-blue);
+            font-weight: 700;
+            text-shadow: 0 0 6px rgba(0, 242, 254, 0.4);
+        }
+        
+        
+        
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="brand-header">
+            <h1>🏨 Luxury Stay Portal</h1>
+            <p>Sign in to access your reservation workspace</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="name@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="login-btn">Sign In</button>
+        </form>
+
+        <div class="footer-links">
+            New to the platform? <a href="register.html">Create an account</a>
+        </div>
+        
+        
+        <div class="powered-by" style="margin-top: 20px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); letter-spacing: 0.8px; text-transform: uppercase;">
+            <!-- Powered by --> <span style="color: #00f2fe; font-weight: 700; text-shadow: 0 0 6px rgba(0, 22, 254, 0.4);">Abhishek</span>
+        </div>
+    </div>
+   <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        try {
+            const response = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                
+                // Store JWT token and user info
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user || { email }));
+                
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid email or password!');
+            }
+        } catch (error) {
+            console.error('Login Error:', error);
+            alert('Server error. Please try again later.');
+        }
+    });
+</script>
+</body>
+</html>
